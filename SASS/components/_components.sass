@@ -1,0 +1,78 @@
+@use './../helpers/_variables' as *
+@use './../helpers/_mixins' as *
+@use './../helpers/_functions' as *
+
+.main-btn
+    width: fit-content
+    margin: auto
+    padding: 5px 25px
+    border: 2px solid black
+    position: relative
+    cursor: pointer
+    transition: $main-transition
+    z-index: 100
+
+    &:hover
+        color: white
+        transition-delay: .5s
+        border: 2px solid white
+
+    &::before,
+    &::after
+        content: ""
+        @include circle(12px, $main-color)
+        @include p-a-y-center
+
+    &::before
+        left: -30px
+
+    &:hover::before
+        z-index: -1
+        @include prefixer(animation, left-move .5s linear forwards,(webkit moz ms o))
+        @include keyF(left-move)
+            50%
+                left: 0
+                @include box(12px)
+            100%
+                left: 0
+                @include box(50%, 100%)
+                border-radius: 0
+    &::after
+        right: -30px
+
+    &:hover::after
+        z-index: -1
+        @include prefixer(animation, right-move .5s linear forwards,(webkit moz ms o))
+        @include keyF(right-move)
+            50%
+                right: 0
+                @include box(12px) 
+            100%
+                right: 0
+                @include box(50%, 100%)
+                border-radius: 0
+
+.grid-1
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr))
+    gap: 30px
+
+.grid-2
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))
+    gap: 30px
+
+.grid-3
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    gap: 30px
+
+.grid-4
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+    gap: 30px
+
+.grid-5
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))
+    gap: 30px

@@ -1,0 +1,155 @@
+@use './_variables' as *
+
+@mixin prefixer($property, $value, $prefixes: (webkit moz ms o))
+    #{$property}: $value
+    @each $prefix in $prefixes
+        #{'-' + $prefix + '-' + $property}: $value
+
+@mixin box($width, $height: $width) 
+    width: $width
+    height: $height
+
+@mixin box-shadow($value)
+    @include prefixer(box-shadow, $value)
+
+@mixin pseudo
+    position: relative
+    &::before
+        content: ""
+        position: absolute
+        @include box(100%)
+
+@mixin list-reset
+    margin: 0
+    padding: 0
+    list-style: none
+
+@mixin flex-direction($direction)
+    @if $direction == column
+        -webkit-flex-direction: vertical
+        -moz-flex-direction: vertical
+        -ms-flex-direction: column
+        -webkit-flex-direction: column
+        flex-direction: column
+    @else
+        -webkit-flex-direction: horizontal
+        -moz-flex-direction: horizontal
+        -ms-flex-direction: row
+        -webkit-flex-direction: row
+        flex-direction: row
+
+@mixin flex-center
+    display: flex
+    justify-content: center
+    align-items: center
+
+@mixin flex-between
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+@mixin flex-around
+    display: flex
+    justify-content: space-around
+    align-items: center
+
+@mixin flex-evenly
+    display: flex
+    justify-content: space-evenly
+    align-items: center
+
+@mixin flex-center-column 
+    @include flex-center
+    @include flex-direction(column)
+
+@mixin flex-center-row 
+    @include flex-center
+    @include flex-direction(row)
+
+@mixin flex-center-vert 
+    display: flex
+    align-items: center
+
+@mixin flex-center-horiz 
+    display: flex
+    justify-content: center
+
+@mixin p-r-x-y-center
+    position: relative
+    left: 50%
+    top: 50%
+    @include prefixer(transform, translate(-50%, -50%), webkit moz ms o)
+
+@mixin p-r-x-center
+    position: relative
+    left: 50%
+    @include prefixer(transform, translateX(-50%), webkit moz ms o)
+
+@mixin p-r-y-center
+    position: relative
+    top: 50%
+    @include prefixer(transform, translateY(-50%), webkit moz ms o)
+
+@mixin p-a-x-y-center
+    position: absolute
+    left: 50%
+    top: 50%
+    @include prefixer(transform, translate(-50%, -50%), webkit moz ms o)
+
+@mixin p-a-x-center
+    position: absolute
+    left: 50%
+    @include prefixer(transform, translateX(-50%), webkit moz ms o)
+
+@mixin p-a-y-center
+    position: absolute
+    top: 50%
+    @include prefixer(transform, translateY(-50%), webkit moz ms o)
+
+@mixin overlay($color, $opacity)
+    position: relative
+    &::before
+        content: ""
+        position: absolute
+        top: 0
+        left: 0
+        @include box(100%)
+        background-color: rgba($color, $opacity)
+
+@mixin keyF($anim-name)
+    @-webkit-keyframes #{$anim-name} 
+        @content
+
+    @-moz-keyframes #{$anim-name} 
+        @content
+
+    @keyframes #{$anim-name}
+        @content
+
+@mixin breakPoints($point)
+    @if $point == mobile
+        @media (max-width: 767px)
+            @content
+    @else if $point == small
+        @media (min-width: 768px) and (max-width: 991px)
+            @content
+    @else if $point == medium
+        @media (min-width: 992px) and (max-width: 1199px)
+            @content
+    @else if $point == large
+        @media (min-width: 1200px)
+            @content
+
+@mixin minMedium 
+    @media #{$minMedium}
+        @content
+
+@mixin cover-background 
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: center
+
+@mixin circle($dimensions, $background-color) 
+    @include box($dimensions)
+    @include prefixer(border-radius, 50%)
+    background-color: $background-color

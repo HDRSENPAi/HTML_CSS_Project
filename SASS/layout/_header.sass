@@ -1,0 +1,118 @@
+@use './../helpers/_variables' as *
+@use './../helpers/_mixins' as *
+@use './../helpers/_functions' as *
+
+header
+    margin: 0
+    @include prefixer(box-shadow, $main-box-shadow,(webkit moz ms o))
+    background-color: white
+    position: relative
+    .container
+        flex-wrap: wrap
+        @include breakPoints(mobile)
+            justify-content: center !important
+        .logo
+            max-height: 72px
+            font-weight: bold
+            h2 
+                color: $main-color 
+                margin: 0
+        nav
+            .main-links
+                
+                margin: 0
+                display: flex
+                @include breakPoints(mobile)
+                    flex-direction: row
+                    padding: 0
+                > li
+                    &:hover 
+                        .mega-menu
+                            top: 75px
+                            transition: .4s
+                            animation: to-top .3s linear
+                            z-index: 100
+                            opacity: 1
+                    width: 100px
+                    @include breakPoints(mobile)
+                        padding-inline: 14px
+                        width: fit-content
+                    > a
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        height: 72px
+                        color: black
+                        position: relative
+                        overflow: hidden
+                        &::before
+                            content: ''
+                            position: absolute
+                            top: 0
+                            left: -100px
+                            background-color: $main-color
+                            height: 3px
+                            width: 0
+                        &:hover::before
+                            transition: $main-transition
+                            left: 0
+                            width: 100%
+                        &:hover
+                            background-color: rgb(250, 250, 250)
+                        @include breakPoints(mobile)
+                            height: 50px
+                    .mega-menu
+                        opacity: 0
+                        display: flex
+                        position: absolute
+                        background-color: white
+                        box-shadow: $main-box-shadow
+                        gap: 30px
+                        z-index: -1
+                        top: 120px
+                        right: 0
+                        padding: 20px
+                        @include prefixer(transition,top var(--main-transition) opacity var(--main-transition) , (webkit moz ms o))
+                        
+                        @include breakPoints(mobile)
+                            flex-wrap: wrap
+                            padding: 0
+                            gap: 0
+                            left: 2px
+                            top: 85px
+                            width: 100%
+                        img
+                            @include box(500px, 285px)
+                            @include breakPoints(small)
+                                display: none
+                            @include breakPoints(mobile)
+                                display: none
+                        ul
+                            display: flex
+                            flex-direction: column
+                            padding: 0
+                            margin: 0
+                            text-align: left
+                            &.links1
+                                @include breakPoints(mobile)
+                                    li
+                                        border-bottom: 1px solid #e9e6e6
+                            li
+                                width: 200px
+                                padding-block: 16px
+                                @include breakPoints(mobile)
+                                    width: 370px
+                                &:not(:last-child)
+                                    border-bottom: 1px solid #e9e6e6 
+                                &:hover
+                                        transition: $main-transition
+                                        background-color: #fafafa
+                                svg
+                                    color: $main-color
+                                    margin-right: 5px
+                                a
+                                    padding: 0 
+                                    margin: 0
+                                    font:
+                                        size: 15px
+                                        weight: bold

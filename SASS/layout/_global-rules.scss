@@ -1,0 +1,99 @@
+/* Start Global Rules */
+@use './../helpers/_mixins.sass' as *;
+* {
+    box-sizing: border-box
+}
+
+*:focus {
+    outline: none
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif
+}
+
+a {
+    text-decoration: none !important;
+}
+
+ul > li > a {
+    font-size: clamp(14px, 2vw, 18px);
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakPoints('mobile') {
+        flex-direction: column
+    }
+}
+
+ul, nav {
+    list-style-type: none;
+    padding: 0
+}
+
+textarea {
+    resize: none
+}
+
+textarea:focus::placeholder,
+input:focus::placeholder {
+    opacity: 0
+}
+
+h1 {
+    font-size: clamp(1.8rem, calc(7vh + 1rem), 5rem) !important;
+}
+
+h2 {
+    font-size: clamp(20px, 3vw, 32px);
+}
+
+h3 {
+    font-size: clamp(18px, 2.5vw, 28px);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1
+}
+
+p {
+    text-wrap: balance;
+    line-height: 1.7;
+    color: #777;
+    margin: 0;
+    font-size: clamp(14px, 2vw, 20px);
+}
+
+/* Mobile Screens */
+@media (min-width: 768px) {
+    .container {
+        width: 100%
+    }
+}
+
+/* Medium Screens */
+@media (min-width: 992px) {
+    .container {
+        width: 100%
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1199px) {
+    .container {
+        width: 100%
+    }
+}
+/* End Global Rules */
